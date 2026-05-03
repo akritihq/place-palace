@@ -1,0 +1,10 @@
+numpy>=1.24
+scipy>=1.10
+scikit-learn>=1.2
+pandas>=2.0
+networkx>=3.0
+joblib>=1.2
+
+# Persistence diagrams
+gudhi>=3.8
+GraphRicciCurvature>=0.5.3
