@@ -1,0 +1,20 @@
+cff-version: 1.2.0
+title: "place-palace: certified classification of persistence diagrams"
+message: "If you use this software, please cite the associated papers."
+authors:
+  - family-names: Majhi
+    given-names: Sushovan
+    affiliation: George Washington University
+    email: s.majhi@gwu.edu
+license: MIT
+repository-code: "https://github.com/akritihq/place-palace"
+preferred-citation:
+  type: article
+  title: "Persistence Landmarks: Certified Classification of Persistence Diagrams"
+  authors:
+    - family-names: Bagchi
+    - family-names: Majhi
+      given-names: Sushovan
+    - family-names: Mitra
+    - family-names: Virk
+  year: 2026
