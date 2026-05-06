@@ -6,15 +6,42 @@ authors:
     given-names: Sushovan
     affiliation: George Washington University
     email: s.majhi@gwu.edu
+  - family-names: Mitra
+    given-names: Atish
+    affiliation: Montana Technological University
+  - family-names: Virk
+    given-names: "Žiga"
+    affiliation: "University of Ljubljana / IMFM"
+  - family-names: Bagchi
+    given-names: Pramita
+    affiliation: George Washington University
 license: MIT
 repository-code: "https://github.com/akritihq/place-palace"
 preferred-citation:
   type: article
-  title: "Persistence Landmarks: Certified Classification of Persistence Diagrams"
+  title: "A Closed-Form Persistence-Landmark Pipeline for Certified Point-Cloud and Graph Classification"
   authors:
-    - family-names: Bagchi
     - family-names: Majhi
       given-names: Sushovan
     - family-names: Mitra
+      given-names: Atish
     - family-names: Virk
+      given-names: "Žiga"
+    - family-names: Bagchi
+      given-names: Pramita
   year: 2026
+  url: "https://arxiv.org/abs/2605.02836"
+references:
+  - type: article
+    title: "PALACE: Persistence-Adaptive Landmark Cover Embedding"
+    authors:
+      - family-names: Majhi
+        given-names: Sushovan
+      - family-names: Mitra
+        given-names: Atish
+      - family-names: Virk
+        given-names: "Žiga"
+      - family-names: Bagchi
+        given-names: Pramita
+    year: 2026
+    url: "https://arxiv.org/abs/2605.04046"

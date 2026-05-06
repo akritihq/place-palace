@@ -8,3 +8,4 @@ joblib>=1.2
 # Persistence diagrams
 gudhi>=3.8
 GraphRicciCurvature>=0.5.3
+persim>=0.3

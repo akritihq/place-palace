@@ -276,7 +276,7 @@ DATASET_LOADERS = {
     "MUTAG":      lambda: load_tu_dataset("MUTAG"),
     "NCI1":       lambda: load_tu_dataset("NCI1"),
     "NCI109":     lambda: load_tu_dataset("NCI109"),
-    "PTC":        lambda: load_tu_dataset("PTC_mr"),
+    "PTC":        lambda: load_tu_dataset("PTC_MR"),
     # Protein / social (Jaccard filtration, H0, ordinary persistence)
     "PROTEINS":   lambda: load_tu_dataset("PROTEINS"),
     "DD":         lambda: load_tu_dataset("DD"),
