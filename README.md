@@ -42,6 +42,12 @@ python experiments/full_selector_hierarchy.py      # selector validation: rho_Ma
 | Paper II PALACE vs landscape MMD power                | `experiments/exp_palace_vs_landscape_power.py`  |
 | Paper II §6.2 small-$K$ MUTAG sweep                   | `experiments/exp_mutag_smallK.py`               |
 | Paper II non-interference audit                       | `experiments/exp_noninterference_audit.py`      |
+| Paper II Tab. `nu_coherence_pii`                      | `experiments/audit_nu_coherence_pii.py`         |
+| Paper II Tab. `cor32_regularity`                      | `experiments/audit_cor32_regularity.py`         |
+| Paper II Tab. `fps_radius_ablation`                   | `experiments/exp_fps_radius_ablation_pii.py`    |
+| Paper II Tab. `h0_joint_feature`                      | `experiments/exp_pv_joint_feature.py`           |
+| Paper II Tab. `graph_comparison` (PI-GIN)             | `experiments/exp_tda_gnn_baseline_pii.py`, `embedding/pi_gin.py` |
+| Paper II graph rows (PROTEINS/DD/IMDB/NCI109)         | `experiments/exp_grid_{proteins,imdbb,imdbm,nci109}.py`, `experiments/cluster_graph_classifiers.py` |
 | Paper I certificate audit                             | `experiments/exp_pi_certificate_bound_audit.py` |
 
 Intermediate caches are regenerated on first run; outputs are
