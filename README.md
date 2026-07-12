@@ -48,10 +48,19 @@ python experiments/full_selector_hierarchy.py      # selector validation: rho_Ma
 | Paper II Tab. `h0_joint_feature`                      | `experiments/exp_pv_joint_feature.py`           |
 | Paper II Tab. `graph_comparison` (PI-GIN)             | `experiments/exp_tda_gnn_baseline_pii.py`, `embedding/pi_gin.py` |
 | Paper II graph rows (PROTEINS/DD/IMDB/NCI109)         | `experiments/exp_grid_{proteins,imdbb,imdbm,nci109}.py`, `experiments/cluster_graph_classifiers.py` |
-| Paper I certificate audit                             | `experiments/exp_pi_certificate_bound_audit.py` |
+| Paper I Tab. `certificate_bound_audit`                | `experiments/exp_pi_certificate_bound_audit.py` |
+| Paper I Tab. `coherence_audit`                        | `experiments/exp_pi_coherence_audit.py`         |
+| Paper I Tab. `cert_firing`                            | `experiments/regen_cert_firing_table_honest.py` |
+| Paper I honest per-fold firing (Rem. 5.3)             | `experiments/recompute_cert_firing_honest_perfold.py` |
+| Paper I Rem. 5.2 stable-rank audit                    | `experiments/audit_stable_rank_HW.py`           |
+| Paper I Tab. `exp1` closed-form Mah selector          | `experiments/selector_ablation_committed.py`    |
+| Paper I §6 Ballester--Rieck VR demo                   | `experiments/exp_ballester_rieck_demo.py`       |
+| Paper I Figs. `intro_pd` / `orbits`                   | `figures/mutag_graph_to_diagram.pdf`, `figures/orbit5k_examples.pdf` |
 
-Intermediate caches are regenerated on first run; outputs are
-written under `results/` (gitignored).
+Intermediate caches and raw fold-level accuracies are written under
+`results/` (gitignored); they regenerate on first run of the scripts
+above. The anonymized supplementary attached to each submission
+additionally ships the exact fold-level CSVs.
 
 ## Citation
 
