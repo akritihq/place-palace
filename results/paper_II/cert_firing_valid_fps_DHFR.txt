@@ -1,0 +1,18 @@
+DHFR: 756 diagrams, filt closeness, K=200 alpha=0.75 fit_frac=0.5 (1s)
+  seed 0 fold 0: m_min=133 Delta^=0.0002 r_valid=0.0047 r_vP(op,plugin)=0.0002 box/norm viol 0.19/0.06 NC 64.5 (3s)
+  seed 1 fold 0: m_min=133 Delta^=0.0002 r_valid=0.0050 r_vP(op,plugin)=0.0002 box/norm viol 0.13/0.05 NC 59.2 (6s)
+  seed 2 fold 0: m_min=133 Delta^=0.0002 r_valid=0.0048 r_vP(op,plugin)=0.0002 box/norm viol 0.18/0.06 NC 65.8 (9s)
+  seed 3 fold 0: m_min=133 Delta^=0.0002 r_valid=0.0047 r_vP(op,plugin)=0.0002 box/norm viol 0.18/0.06 NC 55.3 (11s)
+  seed 4 fold 0: m_min=133 Delta^=0.0002 r_valid=0.0045 r_vP(op,plugin)=0.0002 box/norm viol 0.18/0.06 NC 61.8 (14s)
+
+DHFR: 50 seed-folds; firing = r < Delta^/4 on the held-out-half centroids
+  valid          fires   0.0% of folds   median r/(Delta^/4) = 104.22
+  pin_plugin     fires   0.0% of folds   median r/(Delta^/4) = 26.46
+  pin_asR        fires   0.0% of folds   median r/(Delta^/4) = 413.36
+  vP_op_plugin   fires   0.0% of folds   median r/(Delta^/4) = 4.39
+  vP_tr_plugin   fires   0.0% of folds   median r/(Delta^/4) = 7.20
+  vP_tr_asR      fires   0.0% of folds   median r/(Delta^/4) = 40.56
+  gauss_plugin   fires   0.0% of folds   median r/(Delta^/4) = 11.39
+  per-point VALID certificate: 0.0% of test points, NC acc on them nan; NC acc 63.9
+wrote <PLEB_HOME>/results/paper_II/cert_firing_valid_fps_DHFR.csv
+CERT-FIRING-VALID DONE

@@ -67,56 +67,27 @@ def auto_detect_L(diagrams) -> float:
 
 
 def db_pair(A: np.ndarray, B: np.ndarray) -> float:
-    """Bottleneck distance via binary search on max-cost matching.
-
-    Coarse approximation: for top-N_max diagrams, treat as
-    max(min over A of d_inf-to-B-or-diagonal, min over B of
-    d_inf-to-A-or-diagonal). This is the L^infty bottleneck distance
-    on diagrams paired against the diagonal."""
-    if len(A) == 0 and len(B) == 0:
-        return 0.0
-    if len(A) == 0:
-        # all B-points to diagonal
-        pers_B = (B[:, 1] - B[:, 0]) / 2.0
-        return float(pers_B.max()) if len(pers_B) else 0.0
-    if len(B) == 0:
-        pers_A = (A[:, 1] - A[:, 0]) / 2.0
-        return float(pers_A.max()) if len(pers_A) else 0.0
-    # d_inf(A, b) for each (A_i, B_j)
-    D = cdist(A, B, metric='chebyshev')
-    pers_A = (A[:, 1] - A[:, 0]) / 2.0
-    pers_B = (B[:, 1] - B[:, 0]) / 2.0
-    # closest-to-diagonal for each pt
-    dA = pers_A
-    dB = pers_B
-    # match A_i to B_j or diagonal
-    # cost A_i -> B_j is min(D_ij, dA_i + dB_j)
-    # the bottleneck is approximately:
-    # d_B = max(min over A of cost to B-or-diag,
-    #          min over B of cost from A-or-diag)
-    cost_AB = np.minimum(D, dA[:, None] + dB[None, :])
-    bottle_A = cost_AB.min(axis=1).min(axis=0)  # closest match cost over A
-    bottle_B = cost_AB.min(axis=0).min(axis=0)
-    # max-cost match heuristic
-    return float(max(cost_AB.min(axis=1).max(),
-                     cost_AB.min(axis=0).max()))
+    """Exact bottleneck distance (gudhi).  Until 2026-11-08 this was a matching-free heuristic
+    with a sum-via-diagonal cost: median relative error -54% to -97% against the exact value;
+    on MUTAG it accepted 4 pairs with d_B < tau and rejected 3016 of 3121 pairs that qualify."""
+    import gudhi
+    A = A if len(A) else np.zeros((0, 2)); B = B if len(B) else np.zeros((0, 2))
+    return float(gudhi.bottleneck_distance(A, B))
 
 
 def check_nu_coherence(A: np.ndarray, B: np.ndarray,
                        emb, tau: float) -> bool:
-    """Check PII nu-coherence: exists active k* with
-    |Phi_{k*}(A) - Phi_{k*}(B)| >= w_{k*} * tau / 4."""
-    PhiA = emb.embed(A)
-    PhiB = emb.embed(B)
-    diff = np.abs(PhiA - PhiB)
-    # active landmarks: r_k >= tau/4
+    """Definition nu_coherence_pII on the paper's scale (Phi_k = w_k phi_k): exists active k*
+    (r_k >= tau/4) with |Phi_k(A) - Phi_k(B)| >= w_k tau/4, i.e. |phi_k(A) - phi_k(B)| >= tau/4.
+    emb.embed carries the implementation's extra 2^{-n-1/2} (nonuniform.py module docstring), so
+    until 2026-11-08 this test was 2.83x stricter than the definition (rates were 100% anyway)."""
+    from embedding.nonuniform import hard_coords
+    phiA = hard_coords(emb.positions, emb.radii, emb._clip(A))
+    phiB = hard_coords(emb.positions, emb.radii, emb._clip(B))
     active = emb.radii >= (tau / 4.0)
     if not np.any(active):
         return False
-    floor = emb.weights * (tau / 4.0)
-    # nu-coherence: exists active k* with diff[k] >= floor[k]
-    holds = (diff[active] >= floor[active])
-    return bool(np.any(holds))
+    return bool(np.any(np.abs(phiA - phiB)[active] >= tau / 4.0))
 
 
 def process(name: str, filtrations: list[str]) -> dict:
@@ -141,8 +112,12 @@ def process(name: str, filtrations: list[str]) -> dict:
         n_diagram=1, seed=SEED, alpha=ALPHA_RADIUS,
     )
     K = emb.K
-    tau = float(np.median(emb.radii))  # use median radius as tau
-    print(f"  K = {K}; tau = {tau:.4f}; L = {L:.4f}")
+    # ONE tau: the median half-persistence of the training points, which is also the clip scale
+    # (Paper II protocol table).  The median clipped radius used until 2026-11-08 equals tau/2 on
+    # these sets (95-100% of radii sat on the lower clip); reported alongside for comparison.
+    tau = float(emb.tau)
+    tau_rad = float(np.median(emb.radii))
+    print(f"  K = {K}; tau = {tau:.4f} (median radius {tau_rad:.4f}); L = {L:.4f}; cap enforced = {emb.cap_enforced}")
 
     rng = np.random.default_rng(SEED)
     classes = np.unique(labels)
@@ -172,6 +147,8 @@ def process(name: str, filtrations: list[str]) -> dict:
         'filt': '+'.join(filtrations),
         'K': K,
         'tau': tau,
+        'tau_median_radius': tau_rad,
+        'cap_enforced': bool(emb.cap_enforced),
         'pairs_examined': cross_pairs_seen,
         'qualifying_pairs': qualifying_pairs,
         'coherent_pairs': coherent_pairs,

@@ -24,7 +24,7 @@ import sys; sys.path.insert(0, '.')
 import numpy as np
 import pickle
 import time
-import csv
+import csv, os
 from pathlib import Path
 from itertools import product
 from scipy.spatial.distance import cdist, pdist
@@ -50,6 +50,13 @@ C_GRID = [0.01, 0.1, 1, 10, 100, 1000]
 Q_GRID = [0.75, 0.85, 0.90, 0.95, 0.99]
 N_FOLDS = 10
 SEED = 42
+# PUSH92_SEEDS="42,43,44" runs several outer-CV seeds (2026-11-08: one seed and a population std
+# were all the paper had behind 91.26 +/- 0.98); per-fold accuracies are written to push92_folds.csv
+SEEDS = [int(s) for s in os.environ.get("PUSH92_SEEDS", str(SEED)).split(",")]
+OUT_SUFFIX = os.environ.get("PUSH92_OUT_SUFFIX", "")          # e.g. _seed43, so seeds can run as separate jobs
+# PUSH92_CONFIGS="3,7": run only these flat indices over EXPERIMENTS x PARAM_GRID (24 configs), so a
+# sweep can be submitted as many ~25-minute tasks that backfill; merge with experiments/push92_merge.py
+CONFIGS = {int(c) for c in os.environ["PUSH92_CONFIGS"].split(",")} if os.environ.get("PUSH92_CONFIGS") else None
 N_CLASSES = 5
 N_JOBS = 10
 
@@ -279,23 +286,30 @@ def main():
         log(f"  {name}: {len(dgms_all[name])} diagrams, "
             f"avg {np.mean([len(d) for d in dgms_all[name]]):.1f} pts")
 
-    skf = StratifiedKFold(n_splits=N_FOLDS, shuffle=True, random_state=SEED)
-    folds = list(skf.split(labels, labels))
+    fold_sets = {s: list(StratifiedKFold(n_splits=N_FOLDS, shuffle=True, random_state=s).split(labels, labels))
+                 for s in SEEDS}
 
     total_configs = sum(1 for exp in EXPERIMENTS
                         if all(c in dgms_all for c in exp['caches'])) * len(PARAM_GRID)
     log(f"\n{'█'*72}")
-    log(f"  PUSH FOR 92%: {total_configs} configs × {N_FOLDS} folds")
+    log(f"  PUSH FOR 92%: {total_configs} configs × {len(SEEDS)} seeds × {N_FOLDS} folds  (seeds {SEEDS})")
     log(f"{'█'*72}\n")
 
     rows = []
+    fold_rows = []
+    flat = -1
     for exp in EXPERIMENTS:
         if not all(c in dgms_all for c in exp['caches']):
             log(f"  [skip] {exp['name']}: missing cache")
+            flat += len(PARAM_GRID)
             continue
 
         n_filts = len(exp['caches'])
         for K, shrink in PARAM_GRID:
+          flat += 1
+          if CONFIGS is not None and flat not in CONFIGS:
+              continue
+          for seed, folds in fold_sets.items():
             t0 = time.time()
             dim = K * n_filts
             fold_results = Parallel(n_jobs=N_JOBS, verbose=0)(
@@ -303,6 +317,10 @@ def main():
                                   labels, K, shrink)
                 for fi, (tri, tei) in enumerate(folds)
             )
+            for fi, r in enumerate(fold_results):
+                fold_rows.append({'experiment': exp['name'], 'K': K, 'shrink': shrink, 'seed': seed, 'fold': fi,
+                                  'wlk_fix_te': r['wlk_fix_te'], 'wlk_qt_te': r['wlk_qt_te'], 'xgb_te': r['xgb_te'],
+                                  'wlk_q': r['wlk_q']})
 
             wf = np.array([r['wlk_fix_te'] for r in fold_results]) * 100
             wft = np.array([r['wlk_fix_tr'] for r in fold_results]) * 100
@@ -312,28 +330,31 @@ def main():
             xgt = np.array([r['xgb_tr'] for r in fold_results]) * 100
             qs = [r['wlk_q'] for r in fold_results]
 
+            sd = lambda a: float(a.std(ddof=1)) if len(a) > 1 else 0.0   # sample std over folds (was ddof=0)
             row = {
                 'experiment': exp['name'], 'n_filts': n_filts,
-                'K': K, 'shrink': shrink, 'dim': dim,
-                'wlk_fix_mean': wf.mean(), 'wlk_fix_std': wf.std(),
+                'K': K, 'shrink': shrink, 'dim': dim, 'seed': seed,
+                'wlk_fix_mean': wf.mean(), 'wlk_fix_std': sd(wf),
                 'wlk_fix_train': wft.mean(),
-                'wlk_qt_mean': wq.mean(), 'wlk_qt_std': wq.std(),
+                'wlk_qt_mean': wq.mean(), 'wlk_qt_std': sd(wq),
                 'wlk_qt_train': wqt.mean(), 'wlk_qt_q': np.median(qs),
-                'xgb_mean': xg.mean(), 'xgb_std': xg.std(),
+                'xgb_mean': xg.mean(), 'xgb_std': sd(xg),
                 'xgb_train': xgt.mean(),
             }
             rows.append(row)
 
             best = max(wf.mean(), wq.mean(), xg.mean())
             marker = " ***" if best >= 91.5 else (" **" if best >= 91.0 else "")
-            log(f"  {exp['name']:<25s} K={K:<3d} α={shrink:<4.2f} dim={dim:4d}  "
+            log(f"  {exp['name']:<25s} K={K:<3d} α={shrink:<4.2f} dim={dim:4d} seed={seed}  "
                 f"WLK={wf.mean():.2f}±{wf.std():.2f}  "
                 f"WLK-q={wq.mean():.2f}±{wq.std():.2f}(q̃={np.median(qs):.2f})  "
                 f"XGB={xg.mean():.1f}±{xg.std():.1f}  "
                 f"({time.time()-t0:.0f}s){marker}")
 
     # Save
-    out = OUT_DIR / 'push92.csv'
+    if not rows:
+        log('no configs selected'); return
+    out = OUT_DIR / f'push92{OUT_SUFFIX}.csv'
     fieldnames = list(rows[0].keys())
     with open(out, 'w', newline='') as f:
         w = csv.DictWriter(f, fieldnames=fieldnames)
@@ -342,6 +363,12 @@ def main():
             w.writerow({k: (f"{r[k]:.4f}" if isinstance(r[k], float) else r[k])
                         for k in fieldnames})
     log(f"\nSaved → {out}")
+    with open(OUT_DIR / f'push92_folds{OUT_SUFFIX}.csv', 'w', newline='') as f:
+        w = csv.DictWriter(f, fieldnames=list(fold_rows[0].keys()))
+        w.writeheader()
+        for r in fold_rows:
+            w.writerow(r)
+    log(f"Saved per-fold accuracies → {OUT_DIR / f'push92_folds{OUT_SUFFIX}.csv'}")
 
     # Grand summary
     log(f"\n{'█'*72}")

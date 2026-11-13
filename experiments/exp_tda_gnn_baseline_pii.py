@@ -3,7 +3,7 @@ exp_tda_gnn_baseline_pii.py
 ---------------------------
 
 TDA-GNN baseline integration scaffolding for Paper II
-(JMLR-blocker #10).  When activated and a TDA-GNN package is
+.  When activated and a TDA-GNN package is
 installed, this script runs TOGL or persistence-augmented GIN on
 the chemical pool under PALACE's protocol (5 seeds x 10 folds,
 matched hyperparameter budget) and writes results to
@@ -27,7 +27,7 @@ Backend options (any one suffices):
     re-derivation of \\citet{Hofer2020}'s persistence-image GIN
     rather than TOGL itself.
 
-Cluster usage (Pegasus@GW), once a backend is installed:
+Usage, once a backend is installed:
   python experiments/exp_tda_gnn_baseline_pii.py
   python experiments/exp_tda_gnn_baseline_pii.py MUTAG DHFR
   python experiments/exp_tda_gnn_baseline_pii.py --backend togl

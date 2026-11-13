@@ -1,0 +1,15 @@
+Dataset: 240 clouds, 4 classes (60 per class), 80 pts/cloud, sigma=0.05
+Chance: 25%   Oracle: 100%
+
+4-class task (joint size + arc-pattern):
+  alpha     :  98.8 ±  2.5  per-fold: ['100', '94', '100', '100', '100']
+  density   :  73.3 ±  4.0  per-fold: ['71', '79', '69', '77', '71']
+  concat    :  99.2 ±  1.7  per-fold: ['100', '96', '100', '100', '100']
+
+Per-axis 2-class diagnostic (PALACE on each filtration alone):
+  size     via alpha   :  98.3% (chance: 50%)
+  size     via density :  85.4% (chance: 50%)
+  density  via alpha   :  98.8% (chance: 50%)
+  density  via density :  87.9% (chance: 50%)
+
+Wrote results/paper_V/exp_pv_joint_feature.csv

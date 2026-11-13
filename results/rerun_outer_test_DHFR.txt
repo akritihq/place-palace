@@ -1,0 +1,74 @@
+DHFR: 5 seeds x 10 folds; 150 distinct (fold, filt) embeddings to fit
+Computing persistence for DHFR (hks_t0.1, H0H1, extended) ...
+  100/756
+  200/756
+  300/756
+  400/756
+  500/756
+  600/756
+  700/756
+Computing persistence for DHFR (hks_t0.25, H0H1, extended) ...
+  100/756
+  200/756
+  300/756
+  400/756
+  500/756
+  600/756
+  700/756
+Computing persistence for DHFR (hks_t0.5, H0H1, extended) ...
+  100/756
+  200/756
+  300/756
+  400/756
+  500/756
+  600/756
+  700/756
+Computing persistence for DHFR (hks_t1, H0H1, extended) ...
+  100/756
+  200/756
+  300/756
+  400/756
+  500/756
+  600/756
+  700/756
+Computing persistence for DHFR (hks_t100, H0H1, extended) ...
+  100/756
+  200/756
+  300/756
+  400/756
+  500/756
+  600/756
+  700/756
+Computing persistence for DHFR (hks_t2, H0H1, extended) ...
+  100/756
+  200/756
+  300/756
+  400/756
+  500/756
+  600/756
+  700/756
+Computing persistence for DHFR (hks_t50, H0H1, extended) ...
+  100/756
+  200/756
+  300/756
+  400/756
+  500/756
+  600/756
+  700/756
+  diagrams ready in 10.8s, L=59.400
+  15/150
+  30/150
+  45/150
+  60/150
+  75/150
+  90/150
+  105/150
+  120/150
+  135/150
+  150/150
+wrote <PLEB_HOME>/results/filtration_grid/analysis/outer_test_selected_dhfr.csv
+
+=== DHFR: outer-fold test accuracy (mean ± sd over seed x fold) ===
+  mah      n= 50  test  75.7 ±  4.1   (inner-CV at pick  77.5)   top filts: {'betw+hks10': 19, 'deg+eigen': 18, 'nodelabel+betw': 10}
+  gamma    n= 50  test  60.9 ±  0.6   (inner-CV at pick  60.9)   top filts: {'ricci': 50}
+  innercv  n= 50  test  80.5 ±  4.1   (inner-CV at pick  80.9)   top filts: {'ricci+hks10': 24, 'hks_t10': 10, 'hks_t25': 9}

@@ -3,7 +3,7 @@ recompute_cert_firing_honest_perfold.py
 ---------------------------------------
 J5KD-W5/W6 + 6nmp-Pt3/Pt5 (TMLR round-1): EXACT per-fold honest firing.
 
-The submission firing table (results/paper_I/cert_firing_variance_pinelis.csv,
+The v1 firing table (results/paper_I/cert_firing_variance_pinelis.csv,
 reproduced by audit_variance_aware_pinelis.py) used the CLEAN variance-aware
 radius r_vP = sqrt(2 tr(Σ) L / m) tested against Δ̂/2. The honest radius carries
 the linear Bernstein term and the empirical firing condition needs Δ̂/4
@@ -13,7 +13,7 @@ the linear Bernstein term and the empirical firing condition needs Δ̂/4
     honest firing:  r_vP_honest < Δ̂/4.
 
 This script recomputes firing PER FOLD (not from per-dataset medians), over the
-same per-fold records that reproduce the frozen submission table exactly
+same per-fold records that reproduce the frozen v1 table exactly
 (verified: MUTAG deg+hks10 median ell=4003, R=6.699, σ=1.229, Δ̂=1.570). tr(Σ) is
 taken as ‖Σ̂‖_op (empirical stable rank ≤ 1.17 on the audited datasets).
 
@@ -28,7 +28,7 @@ RECORDS_DIR = Path('results/filtration_grid')
 ALPHA = 0.05
 
 # (display, records_stem, k, committed headline descriptor) -- matches
-# experiments/audit_variance_aware_pinelis.py (the submission firing table).
+# experiments/audit_variance_aware_pinelis.py (the v1 firing table).
 DATASETS = [
     ('MUTAG', 'mutag_records_newweights', 2, 'deg+hks10'),
     ('PROTEINS', 'proteins_records_newweights', 2, 'deg+ricci'),
@@ -53,11 +53,11 @@ def process(name, stem, k, filt):
         return None
     L = math.log(2 * k / ALPHA)
     R, sig, m, dh = s.R_max_tr, s.Sigma_op_max, s.m_min, s.delta_hat
-    r_vp_old = (2 * sig * L / m).pow(0.5)              # clean submission radius
+    r_vp_old = (2 * sig * L / m).pow(0.5)              # v1 radius
     r_vp_hon = r_vp_old + 4 * R * L / (3 * m)          # + linear Bernstein term
     return dict(
         dataset=name, filt=filt, n_fold=len(s),
-        fire_old_half=100 * (r_vp_old < dh / 2).mean(),      # reproduces submission
+        fire_old_half=100 * (r_vp_old < dh / 2).mean(),      # reproduces v1
         fire_hon_half=100 * (r_vp_hon < dh / 2).mean(),      # Pt3 only
         fire_hon_quarter=100 * (r_vp_hon < dh / 4).mean(),   # Pt3 + Pt5 (honest)
     )
@@ -70,7 +70,7 @@ def main():
     thr = 0.0
     old = o[o.fire_old_half > thr].dataset.tolist()
     hon = o[o.fire_hon_quarter > thr].dataset.tolist()
-    print(f"\nSubmission (old radius, Δ̂/2):     {len(old)}/12  {old}")
+    print(f"\nv1 (old radius, Δ̂/2):     {len(old)}/12  {old}")
     print(f"Honest (Pt3 term) + Δ̂/2:          "
           f"{int((o.fire_hon_half > thr).sum())}/12")
     print(f"Honest (Pt3 term) + Δ̂/4 (final):  {len(hon)}/12  {hon}")

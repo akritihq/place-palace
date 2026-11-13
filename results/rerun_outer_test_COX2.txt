@@ -1,0 +1,48 @@
+COX2: 5 seeds x 10 folds; 121 distinct (fold, filt) embeddings to fit
+Computing persistence for COX2 (hks_t0.1, H0H1, extended) ...
+  100/467
+  200/467
+  300/467
+  400/467
+Computing persistence for COX2 (hks_t0.25, H0H1, extended) ...
+  100/467
+  200/467
+  300/467
+  400/467
+Computing persistence for COX2 (hks_t0.5, H0H1, extended) ...
+  100/467
+  200/467
+  300/467
+  400/467
+Computing persistence for COX2 (hks_t100, H0H1, extended) ...
+  100/467
+  200/467
+  300/467
+  400/467
+Computing persistence for COX2 (hks_t2, H0H1, extended) ...
+  100/467
+  200/467
+  300/467
+  400/467
+Computing persistence for COX2 (hks_t50, H0H1, extended) ...
+  100/467
+  200/467
+  300/467
+  400/467
+  diagrams ready in 6.7s, L=39.600
+  12/121
+  24/121
+  36/121
+  48/121
+  60/121
+  72/121
+  84/121
+  96/121
+  108/121
+  120/121
+wrote <PLEB_HOME>/results/filtration_grid/analysis/outer_test_selected_cox2.csv
+
+=== COX2: outer-fold test accuracy (mean ± sd over seed x fold) ===
+  mah      n= 50  test  79.8 ±  4.3   (inner-CV at pick  81.2)   top filts: {'nodelabel+betw': 50}
+  gamma    n= 50  test  78.2 ±  0.8   (inner-CV at pick  78.2)   top filts: {'adamic_adar': 33, 'jaccard': 13, 'core_number': 4}
+  innercv  n= 50  test  79.4 ±  3.9   (inner-CV at pick  81.3)   top filts: {'nodelabel+betw': 29, 'nodelabel': 4, 'betw+closeness': 3}

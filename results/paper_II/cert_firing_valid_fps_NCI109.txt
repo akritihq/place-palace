@@ -1,0 +1,102 @@
+Computing persistence for NCI109 (hks_t2, H0H1, extended) ...
+  100/4127
+  200/4127
+  300/4127
+  400/4127
+  500/4127
+  600/4127
+  700/4127
+  800/4127
+  900/4127
+  1000/4127
+  1100/4127
+  1200/4127
+  1300/4127
+  1400/4127
+  1500/4127
+  1600/4127
+  1700/4127
+  1800/4127
+  1900/4127
+  2000/4127
+  2100/4127
+  2200/4127
+  2300/4127
+  2400/4127
+  2500/4127
+  2600/4127
+  2700/4127
+  2800/4127
+  2900/4127
+  3000/4127
+  3100/4127
+  3200/4127
+  3300/4127
+  3400/4127
+  3500/4127
+  3600/4127
+  3700/4127
+  3800/4127
+  3900/4127
+  4000/4127
+  4100/4127
+Computing persistence for NCI109 (hks_t25, H0H1, extended) ...
+  100/4127
+  200/4127
+  300/4127
+  400/4127
+  500/4127
+  600/4127
+  700/4127
+  800/4127
+  900/4127
+  1000/4127
+  1100/4127
+  1200/4127
+  1300/4127
+  1400/4127
+  1500/4127
+  1600/4127
+  1700/4127
+  1800/4127
+  1900/4127
+  2000/4127
+  2100/4127
+  2200/4127
+  2300/4127
+  2400/4127
+  2500/4127
+  2600/4127
+  2700/4127
+  2800/4127
+  2900/4127
+  3000/4127
+  3100/4127
+  3200/4127
+  3300/4127
+  3400/4127
+  3500/4127
+  3600/4127
+  3700/4127
+  3800/4127
+  3900/4127
+  4000/4127
+  4100/4127
+NCI109: 4127 diagrams, filt hks2+hks25, K=200 alpha=0.75 fit_frac=0.5 (19s)
+  seed 0 fold 0: m_min=922 Delta^=0.0005 r_valid=0.0014 r_vP(op,plugin)=0.0001 box/norm viol 0.34/0.12 NC 67.1 (21s)
+  seed 1 fold 0: m_min=922 Delta^=0.0005 r_valid=0.0014 r_vP(op,plugin)=0.0001 box/norm viol 0.34/0.12 NC 64.6 (45s)
+  seed 2 fold 0: m_min=922 Delta^=0.0005 r_valid=0.0015 r_vP(op,plugin)=0.0002 box/norm viol 0.35/0.14 NC 64.2 (68s)
+  seed 3 fold 0: m_min=921 Delta^=0.0004 r_valid=0.0015 r_vP(op,plugin)=0.0001 box/norm viol 0.23/0.10 NC 65.6 (92s)
+  seed 4 fold 0: m_min=921 Delta^=0.0004 r_valid=0.0015 r_vP(op,plugin)=0.0001 box/norm viol 0.33/0.11 NC 63.0 (115s)
+
+NCI109: 50 seed-folds; firing = r < Delta^/4 on the held-out-half centroids
+  valid          fires   0.0% of folds   median r/(Delta^/4) = 13.34
+  pin_plugin     fires   0.0% of folds   median r/(Delta^/4) = 15.35
+  pin_asR        fires   0.0% of folds   median r/(Delta^/4) = 138.32
+  vP_op_plugin   fires   0.0% of folds   median r/(Delta^/4) = 1.28
+  vP_tr_plugin   fires   0.0% of folds   median r/(Delta^/4) = 2.54
+  vP_tr_asR      fires   0.0% of folds   median r/(Delta^/4) = 6.57
+  gauss_plugin   fires   0.0% of folds   median r/(Delta^/4) = 3.90
+  per-point VALID certificate: 0.0% of test points, NC acc on them nan; NC acc 63.9
+wrote <PLEB_HOME>/results/paper_II/cert_firing_valid_fps_NCI109.csv
+CERT-FIRING-VALID DONE

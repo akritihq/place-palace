@@ -1,0 +1,186 @@
+PROTEINS: 5 seeds x 10 folds; 146 distinct (fold, filt) embeddings to fit
+Computing persistence for PROTEINS (adamic_adar, H0, extended) ...
+  100/1113
+  200/1113
+  300/1113
+  400/1113
+  500/1113
+  600/1113
+  700/1113
+  800/1113
+  900/1113
+  1000/1113
+  1100/1113
+Computing persistence for PROTEINS (edge_betweenness, H0, extended) ...
+  100/1113
+  200/1113
+  300/1113
+  400/1113
+  500/1113
+  600/1113
+  700/1113
+  800/1113
+  900/1113
+  1000/1113
+  1100/1113
+Computing persistence for PROTEINS (eigenvector, H0, extended) ...
+  100/1113
+  200/1113
+  300/1113
+  400/1113
+  500/1113
+  600/1113
+  700/1113
+  800/1113
+  900/1113
+  1000/1113
+  1100/1113
+Computing persistence for PROTEINS (hks_t0.1, H0, extended) ...
+  100/1113
+  200/1113
+  300/1113
+  400/1113
+  500/1113
+  600/1113
+  700/1113
+  800/1113
+  900/1113
+  1000/1113
+  1100/1113
+Computing persistence for PROTEINS (hks_t0.25, H0, extended) ...
+  100/1113
+  200/1113
+  300/1113
+  400/1113
+  500/1113
+  600/1113
+  700/1113
+  800/1113
+  900/1113
+  1000/1113
+  1100/1113
+Computing persistence for PROTEINS (hks_t0.5, H0, extended) ...
+  100/1113
+  200/1113
+  300/1113
+  400/1113
+  500/1113
+  600/1113
+  700/1113
+  800/1113
+  900/1113
+  1000/1113
+  1100/1113
+Computing persistence for PROTEINS (hks_t1, H0, extended) ...
+  100/1113
+  200/1113
+  300/1113
+  400/1113
+  500/1113
+  600/1113
+  700/1113
+  800/1113
+  900/1113
+  1000/1113
+  1100/1113
+Computing persistence for PROTEINS (hks_t100, H0, extended) ...
+  100/1113
+  200/1113
+  300/1113
+  400/1113
+  500/1113
+  600/1113
+  700/1113
+  800/1113
+  900/1113
+  1000/1113
+  1100/1113
+Computing persistence for PROTEINS (hks_t2, H0, extended) ...
+  100/1113
+  200/1113
+  300/1113
+  400/1113
+  500/1113
+  600/1113
+  700/1113
+  800/1113
+  900/1113
+  1000/1113
+  1100/1113
+Computing persistence for PROTEINS (hks_t25, H0, extended) ...
+  100/1113
+  200/1113
+  300/1113
+  400/1113
+  500/1113
+  600/1113
+  700/1113
+  800/1113
+  900/1113
+  1000/1113
+  1100/1113
+Computing persistence for PROTEINS (hks_t5, H0, extended) ...
+  100/1113
+  200/1113
+  300/1113
+  400/1113
+  500/1113
+  600/1113
+  700/1113
+  800/1113
+  900/1113
+  1000/1113
+  1100/1113
+Computing persistence for PROTEINS (hks_t50, H0, extended) ...
+  100/1113
+  200/1113
+  300/1113
+  400/1113
+  500/1113
+  600/1113
+  700/1113
+  800/1113
+  900/1113
+  1000/1113
+  1100/1113
+Computing persistence for PROTEINS (pagerank, H0, extended) ...
+  100/1113
+  200/1113
+  300/1113
+  400/1113
+  500/1113
+  600/1113
+  700/1113
+  800/1113
+  900/1113
+  1000/1113
+  1100/1113
+Computing persistence for PROTEINS (resource_allocation, H0, extended) ...
+  100/1113
+  200/1113
+  300/1113
+  400/1113
+  500/1113
+  600/1113
+  700/1113
+  800/1113
+  900/1113
+  1000/1113
+  1100/1113
+  diagrams ready in 18.7s, L=14.300
+  14/146
+  28/146
+  42/146
+  56/146
+  70/146
+  84/146
+  98/146
+  112/146
+  126/146
+  140/146
+wrote <PLEB_HOME>/results/filtration_grid/analysis/outer_test_selected_proteins.csv
+
+=== PROTEINS: outer-fold test accuracy (mean ± sd over seed x fold) ===
+  mah      n= 50  test  71.4 ±  3.8   (inner-CV at pick  70.7)   top filts: {'deg+ricci': 50}
+  gamma    n= 50  test  70.4 ±  4.9   (inner-CV at pick  70.1)   top filts: {'degree': 50}
+  innercv  n= 50  test  70.6 ±  3.9   (inner-CV at pick  71.8)   top filts: {'clustering': 24, 'jaccard': 15, 'deg+hks10': 7}

@@ -1,0 +1,113 @@
+
+=== MUTAG (degree+hks_t10) ===
+  188 diagrams, 2 classes
+  L = 4.4000
+  K = 200 landmarks; max radius = 0.2744
+  B          = 0.0274
+  sigma      = 0.0158
+  Delta      = 0.0077
+  K*B^4               = 1.1331e-04    [worst-case LHS]
+  (1/2)sigma^2 Delta^2 = 7.3703e-09    [worst-case RHS]
+  ratio (worst-case)   = 1.537e+04  passes=False
+  sum_k V4            = 7.4294e-09    [variance-aware LHS]
+  4 sigma^2 Delta^2    = 5.8963e-08    [variance-aware RHS]
+  ratio (variance-aw)  = 1.260e-01  passes=True
+  tightening factor (sumV4 / 16KB^4): 4.098e-06
+  m_min Thm 3.1 lift:
+    K (worst-case)              = 200
+    tr(Sigma_c^H) max (var-aware)= 4.2610e-01
+    tightening factor (tr/K)    = 2.130e-03
+  Thm 5.1 radii (m_min=63, alpha=0.05):
+    Delta/2                     = 0.0038
+    R_bar                       = 0.0417
+    ||Sigma_c||_op max          = 0.0001
+    (i)   r_Pin                 = 0.0311     fires=False
+    (ii)  r_Gauss               = 0.0150     fires=False
+    (iii) r_vP (Pinelis-Bern)   = 0.0029     fires=True
+
+=== PTC (degree+betweenness) ===
+  344 diagrams, 2 classes
+  L = 5.5000
+  K = 200 landmarks; max radius = 0.2500
+  B          = 0.1063
+  sigma      = 0.0951
+  Delta      = 0.0130
+  K*B^4               = 2.5489e-02    [worst-case LHS]
+  (1/2)sigma^2 Delta^2 = 7.6070e-07    [worst-case RHS]
+  ratio (worst-case)   = 3.351e+04  passes=False
+  sum_k V4            = 7.7387e-06    [variance-aware LHS]
+  4 sigma^2 Delta^2    = 6.0856e-06    [variance-aware RHS]
+  ratio (variance-aw)  = 1.272e+00  passes=False
+  tightening factor (sumV4 / 16KB^4): 1.898e-05
+  m_min Thm 3.1 lift:
+    K (worst-case)              = 200
+    tr(Sigma_c^H) max (var-aware)= 4.7011e-01
+    tightening factor (tr/K)    = 2.351e-03
+  Thm 5.1 radii (m_min=152, alpha=0.05):
+    Delta/2                     = 0.0065
+    R_bar                       = 0.2612
+    ||Sigma_c||_op max          = 0.0018
+    (i)   r_Pin                 = 0.1255     fires=False
+    (ii)  r_Gauss               = 0.0536     fires=False
+    (iii) r_vP (Pinelis-Bern)   = 0.0102     fires=False
+
+=== COX2 (jaccard+hks_t10) ===
+  467 diagrams, 2 classes
+  L = 1.4457
+  K = 200 landmarks; max radius = 0.1454
+  B          = 0.0165
+  sigma      = 0.0185
+  Delta      = 0.0021
+  K*B^4               = 1.4768e-05    [worst-case LHS]
+  (1/2)sigma^2 Delta^2 = 7.4996e-10    [worst-case RHS]
+  ratio (worst-case)   = 1.969e+04  passes=False
+  sum_k V4            = 3.8537e-09    [variance-aware LHS]
+  4 sigma^2 Delta^2    = 5.9997e-09    [variance-aware RHS]
+  ratio (variance-aw)  = 6.423e-01  passes=True
+  tightening factor (sumV4 / 16KB^4): 1.631e-05
+  m_min Thm 3.1 lift:
+    K (worst-case)              = 200
+    tr(Sigma_c^H) max (var-aware)= 3.8267e-01
+    tightening factor (tr/K)    = 1.913e-03
+  Thm 5.1 radii (m_min=102, alpha=0.05):
+    Delta/2                     = 0.0010
+    R_bar                       = 0.0397
+    ||Sigma_c||_op max          = 0.0001
+    (i)   r_Pin                 = 0.0233     fires=False
+    (ii)  r_Gauss               = 0.0112     fires=False
+    (iii) r_vP (Pinelis-Bern)   = 0.0021     fires=False
+
+=== DHFR (hks_t10) ===
+  756 diagrams, 2 classes
+  L = 1.4364
+  K = 200 landmarks; max radius = 0.0758
+  B          = 0.0124
+  sigma      = 0.0157
+  Delta      = 0.0028
+  K*B^4               = 4.6590e-06    [worst-case LHS]
+  (1/2)sigma^2 Delta^2 = 9.6149e-10    [worst-case RHS]
+  ratio (worst-case)   = 4.846e+03  passes=False
+  sum_k V4            = 2.6268e-09    [variance-aware LHS]
+  4 sigma^2 Delta^2    = 7.6920e-09    [variance-aware RHS]
+  ratio (variance-aw)  = 3.415e-01  passes=True
+  tightening factor (sumV4 / 16KB^4): 3.524e-05
+  m_min Thm 3.1 lift:
+    K (worst-case)              = 200
+    tr(Sigma_c^H) max (var-aware)= 3.7224e-01
+    tightening factor (tr/K)    = 1.861e-03
+  Thm 5.1 radii (m_min=295, alpha=0.05):
+    Delta/2                     = 0.0014
+    R_bar                       = 0.0306
+    ||Sigma_c||_op max          = 0.0000
+    (i)   r_Pin                 = 0.0105     fires=False
+    (ii)  r_Gauss               = 0.0056     fires=False
+    (iii) r_vP (Pinelis-Bern)   = 0.0011     fires=True
+
+Wrote results/paper_II/tables/tab_cor32_regularity.csv
+
+Dataset     K        B    sigma    Delta    ratio_wc pass_wc    ratio_va pass_va     tighten
+--------------------------------------------------------------------------------------------------------------
+MUTAG     200   0.0274   0.0158   0.0077   1.537e+04      no   1.260e-01     YES   4.098e-06
+PTC       200   0.1063   0.0951   0.0130   3.351e+04      no   1.272e+00      no   1.898e-05
+COX2      200   0.0165   0.0185   0.0021   1.969e+04      no   6.423e-01     YES   1.631e-05
+DHFR      200   0.0124   0.0157   0.0028   4.846e+03      no   3.415e-01     YES   3.524e-05

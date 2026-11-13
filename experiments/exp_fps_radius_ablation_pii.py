@@ -4,7 +4,7 @@ exp_fps_radius_ablation_pii.py
 
 FPS-radius (alpha) x seed x dataset robustness ablation for Paper II.
 
-Closes JMLR-blocker #8 (script-side): produces a per-(dataset, alpha,
+Produces a per-(dataset, alpha,
 seed, fold) accuracy CSV that supports the headline-configuration
 robustness claim and identifies the operationally-flat range of alpha.
 
@@ -21,7 +21,7 @@ Output:
   results/paper_II/tables/fps_radius_ablation.csv
     columns: dataset, filt, K, alpha, seed, fold, n_train, n_test, acc
 
-Cluster usage (Pegasus@GW):
+Usage:
   python experiments/exp_fps_radius_ablation_pii.py
   python experiments/exp_fps_radius_ablation_pii.py MUTAG DHFR
   python experiments/exp_fps_radius_ablation_pii.py --alpha-grid 0.50 1.00 1.75 3.00

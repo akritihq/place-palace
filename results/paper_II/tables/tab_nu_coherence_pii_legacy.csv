@@ -1,0 +1,5 @@
+dataset,filt,K,tau,pairs_examined,qualifying_pairs,coherent_pairs,coherent_pct
+MUTAG,degree+hks_t10,200,0.03429385804188931,5121,2000,2000,100.0
+PTC,degree+betweenness,200,0.25,2352,2000,2000,100.0
+COX2,jaccard+hks_t10,200,0.030887002226612517,2688,2000,2000,100.0
+DHFR,hks_t10,200,0.02665487725334629,2280,2000,2000,100.0

@@ -2,17 +2,17 @@
 regen_cert_firing_table_honest.py
 ---------------------------------
 Regenerate tab:cert_firing (TMLR Paper I) with HONEST, theorem-consistent
-numbers, replacing the submission table.
+numbers, replacing the v1 table.
 
-Changes vs the submission table (audit_variance_aware_pinelis.py):
+Changes vs the v1 table (audit_variance_aware_pinelis.py):
   * Pinelis radius uses the theorem form r_Pin = 2R sqrt(2L/m)  (eq:rm-pinelis);
-    the submission table dropped the factor 2.
+    the v1 table dropped the factor 2.
   * Variance-aware radius carries the linear Bernstein term (eq:rm-vp):
         r_vP = sqrt(2 tr(Σ) L / m) + 4 R L / (3 m),   tr(Σ) ≈ ‖Σ̂‖_op.
   * Firing tested against the honest empirical threshold Δ̂/4 (Prop 3.2 / Pt.5),
     NOT Δ̂/2, for all three radii.
 Radii reported as per-fold medians; Fire % is the per-fold firing fraction.
-Reads the current per-fold records, which reproduce the submission firing
+Reads the current per-fold records, which reproduce the v1 firing
 inputs exactly (ell=4003, R=6.699, σ=1.229, Δ̂=1.570 on MUTAG deg+hks10).
 """
 from __future__ import annotations

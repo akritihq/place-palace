@@ -1,0 +1,18 @@
+MUTAG: 188 diagrams, filt betw+hks1, K=200 alpha=0.75 fit_frac=0.5 (18s)
+  seed 0 fold 0: m_min=29 Delta^=0.0017 r_valid=0.0803 r_vP(op,plugin)=0.0023 box/norm viol 0.17/0.05 NC 73.7 (20s)
+  seed 1 fold 0: m_min=29 Delta^=0.0016 r_valid=0.0755 r_vP(op,plugin)=0.0030 box/norm viol 0.24/0.08 NC 94.7 (21s)
+  seed 2 fold 0: m_min=29 Delta^=0.0016 r_valid=0.0804 r_vP(op,plugin)=0.0025 box/norm viol 0.21/0.06 NC 68.4 (22s)
+  seed 3 fold 0: m_min=29 Delta^=0.0019 r_valid=0.0771 r_vP(op,plugin)=0.0024 box/norm viol 0.21/0.07 NC 78.9 (23s)
+  seed 4 fold 0: m_min=29 Delta^=0.0019 r_valid=0.0803 r_vP(op,plugin)=0.0026 box/norm viol 0.24/0.06 NC 89.5 (24s)
+
+MUTAG: 50 seed-folds; firing = r < Delta^/4 on the held-out-half centroids
+  valid          fires   0.0% of folds   median r/(Delta^/4) = 196.25
+  pin_plugin     fires   0.0% of folds   median r/(Delta^/4) = 23.54
+  pin_asR        fires   0.0% of folds   median r/(Delta^/4) = 358.47
+  vP_op_plugin   fires   0.0% of folds   median r/(Delta^/4) = 6.82
+  vP_tr_plugin   fires   0.0% of folds   median r/(Delta^/4) = 8.36
+  vP_tr_asR      fires   0.0% of folds   median r/(Delta^/4) = 70.03
+  gauss_plugin   fires   0.0% of folds   median r/(Delta^/4) = 12.33
+  per-point VALID certificate: 0.0% of test points, NC acc on them nan; NC acc 78.0
+wrote <PLEB_HOME>/results/paper_II/cert_firing_valid_fps_MUTAG.csv
+CERT-FIRING-VALID DONE

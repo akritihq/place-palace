@@ -1,0 +1,186 @@
+DD: 5 seeds x 10 folds; 129 distinct (fold, filt) embeddings to fit
+Computing persistence for DD (adamic_adar, H0, extended) ...
+  100/1178
+  200/1178
+  300/1178
+  400/1178
+  500/1178
+  600/1178
+  700/1178
+  800/1178
+  900/1178
+  1000/1178
+  1100/1178
+Computing persistence for DD (edge_betweenness, H0, extended) ...
+  100/1178
+  200/1178
+  300/1178
+  400/1178
+  500/1178
+  600/1178
+  700/1178
+  800/1178
+  900/1178
+  1000/1178
+  1100/1178
+Computing persistence for DD (eigenvector, H0, extended) ...
+  100/1178
+  200/1178
+  300/1178
+  400/1178
+  500/1178
+  600/1178
+  700/1178
+  800/1178
+  900/1178
+  1000/1178
+  1100/1178
+Computing persistence for DD (hks_t0.1, H0, extended) ...
+  100/1178
+  200/1178
+  300/1178
+  400/1178
+  500/1178
+  600/1178
+  700/1178
+  800/1178
+  900/1178
+  1000/1178
+  1100/1178
+Computing persistence for DD (hks_t0.25, H0, extended) ...
+  100/1178
+  200/1178
+  300/1178
+  400/1178
+  500/1178
+  600/1178
+  700/1178
+  800/1178
+  900/1178
+  1000/1178
+  1100/1178
+Computing persistence for DD (hks_t0.5, H0, extended) ...
+  100/1178
+  200/1178
+  300/1178
+  400/1178
+  500/1178
+  600/1178
+  700/1178
+  800/1178
+  900/1178
+  1000/1178
+  1100/1178
+Computing persistence for DD (hks_t1, H0, extended) ...
+  100/1178
+  200/1178
+  300/1178
+  400/1178
+  500/1178
+  600/1178
+  700/1178
+  800/1178
+  900/1178
+  1000/1178
+  1100/1178
+Computing persistence for DD (hks_t100, H0, extended) ...
+  100/1178
+  200/1178
+  300/1178
+  400/1178
+  500/1178
+  600/1178
+  700/1178
+  800/1178
+  900/1178
+  1000/1178
+  1100/1178
+Computing persistence for DD (hks_t2, H0, extended) ...
+  100/1178
+  200/1178
+  300/1178
+  400/1178
+  500/1178
+  600/1178
+  700/1178
+  800/1178
+  900/1178
+  1000/1178
+  1100/1178
+Computing persistence for DD (hks_t25, H0, extended) ...
+  100/1178
+  200/1178
+  300/1178
+  400/1178
+  500/1178
+  600/1178
+  700/1178
+  800/1178
+  900/1178
+  1000/1178
+  1100/1178
+Computing persistence for DD (hks_t5, H0, extended) ...
+  100/1178
+  200/1178
+  300/1178
+  400/1178
+  500/1178
+  600/1178
+  700/1178
+  800/1178
+  900/1178
+  1000/1178
+  1100/1178
+Computing persistence for DD (hks_t50, H0, extended) ...
+  100/1178
+  200/1178
+  300/1178
+  400/1178
+  500/1178
+  600/1178
+  700/1178
+  800/1178
+  900/1178
+  1000/1178
+  1100/1178
+Computing persistence for DD (pagerank, H0, extended) ...
+  100/1178
+  200/1178
+  300/1178
+  400/1178
+  500/1178
+  600/1178
+  700/1178
+  800/1178
+  900/1178
+  1000/1178
+  1100/1178
+Computing persistence for DD (resource_allocation, H0, extended) ...
+  100/1178
+  200/1178
+  300/1178
+  400/1178
+  500/1178
+  600/1178
+  700/1178
+  800/1178
+  900/1178
+  1000/1178
+  1100/1178
+  diagrams ready in 1360.8s, L=17.600
+  12/129
+  24/129
+  36/129
+  48/129
+  60/129
+  72/129
+  84/129
+  96/129
+  108/129
+  120/129
+wrote <PLEB_HOME>/results/filtration_grid/analysis/outer_test_selected_dd.csv
+
+=== DD: outer-fold test accuracy (mean ± sd over seed x fold) ===
+  mah      n= 50  test  75.8 ±  3.4   (inner-CV at pick  76.2)   top filts: {'jaccard': 28, 'jaccard+hks10': 12, 'clustering': 10}
+  gamma    n= 50  test  75.2 ±  3.3   (inner-CV at pick  75.3)   top filts: {'deg+ricci': 50}
+  innercv  n= 50  test  75.9 ±  3.2   (inner-CV at pick  76.4)   top filts: {'jaccard': 23, 'jaccard+hks10': 20, 'clustering': 3}

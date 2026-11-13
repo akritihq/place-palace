@@ -1,0 +1,17 @@
+Generating annular point clouds …
+Computing alpha persistence (top-30 H_1) …
+  ell=1     uniform:  95.0 +/-  2.2 %
+  ell=1  nonuniform:  94.5 +/-  3.5 %
+  ell=2     uniform:  66.5 +/-  3.0 %
+  ell=2  nonuniform:  94.5 +/-  3.5 %
+  ell=3     uniform:  32.2 +/-  1.7 %
+  ell=3  nonuniform:  94.5 +/-  3.5 %
+  ell=4     uniform:  48.5 +/-  3.9 %
+  ell=4  nonuniform:  94.5 +/-  3.5 %
+  ell=5     uniform:  48.5 +/-  3.9 %
+  ell=5  nonuniform:  94.5 +/-  3.5 %
+  ell=8     uniform:  25.0 +/-  0.0 %
+  ell=8  nonuniform:  94.5 +/-  3.5 %
+
+Wrote results/domain_inflation/results.csv (12 rows)
+Total: 12s
