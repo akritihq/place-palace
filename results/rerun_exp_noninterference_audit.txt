@@ -1,0 +1,77 @@
+
+=== MUTAG (degree+hks_t10) ===
+  188 graphs; sizes after top-50: min=13 max=38 median=26
+  Sampled 2000 cross-class pairs
+    ...250/2000
+    ...500/2000
+    ...750/2000
+    ...1000/2000
+    ...1250/2000
+    ...1500/2000
+    ...1750/2000
+  Valid: 1997; skipped: 3
+  strict %  (>3, all i≠j):      0.0   strict p25/p50:  0.000 / 0.000
+  relaxed-2 (>2, exists i*):    0.1
+  relaxed-1 (>1, exists i*):    0.7   relaxed p25/p50: 0.000 / 0.000
+  within>2 (new PII):           0.0
+  within>4 (PI):                0.0
+
+=== PTC (degree+betweenness) ===
+  344 graphs; sizes after top-50: min=0 max=50 median=12
+  Sampled 2000 cross-class pairs
+    ...250/2000
+    ...500/2000
+    ...750/2000
+    ...1000/2000
+    ...1250/2000
+    ...1500/2000
+    ...1750/2000
+  Valid: 1975; skipped: 25
+  strict %  (>3, all i≠j):      0.2   strict p25/p50:  0.000 / 0.000
+  relaxed-2 (>2, exists i*):    4.9
+  relaxed-1 (>1, exists i*):   19.7   relaxed p25/p50: 0.000 / 0.451
+  within>2 (new PII):           0.3
+  within>4 (PI):                0.2
+
+=== COX2 (jaccard+hks_t10) ===
+  467 graphs; sizes after top-50: min=22 max=42 median=30
+  Sampled 2000 cross-class pairs
+    ...250/2000
+    ...500/2000
+    ...750/2000
+    ...1000/2000
+    ...1250/2000
+    ...1500/2000
+    ...1750/2000
+  Valid: 1998; skipped: 2
+  strict %  (>3, all i≠j):      0.0   strict p25/p50:  0.000 / 0.000
+  relaxed-2 (>2, exists i*):    0.3
+  relaxed-1 (>1, exists i*):    3.8   relaxed p25/p50: 0.000 / 0.000
+  within>2 (new PII):           0.0
+  within>4 (PI):                0.0
+
+=== DHFR (hks_t10) ===
+  756 graphs; sizes after top-50: min=14 max=50 median=31
+  Sampled 2000 cross-class pairs
+    ...250/2000
+    ...500/2000
+    ...750/2000
+    ...1000/2000
+    ...1250/2000
+    ...1500/2000
+    ...1750/2000
+  Valid: 1998; skipped: 2
+  strict %  (>3, all i≠j):      0.0   strict p25/p50:  0.000 / 0.001
+  relaxed-2 (>2, exists i*):    0.3
+  relaxed-1 (>1, exists i*):    2.0   relaxed p25/p50: 0.000 / 0.000
+  within>2 (new PII):           0.0
+  within>4 (PI):                0.0
+
+=== Summary ===
+Dataset     Filtration                        n   strict %  rel-2 %  rel-1 %   w>2 %   w>4 %   rp25   rp50
+MUTAG       degree+hks_t10                 1997        0.0      0.1      0.7     0.0     0.0   0.00   0.00
+PTC         degree+betweenness             1975        0.2      4.9     19.7     0.3     0.2   0.00   0.45
+COX2        jaccard+hks_t10                1998        0.0      0.3      3.8     0.0     0.0   0.00   0.00
+DHFR        hks_t10                        1998        0.0      0.3      2.0     0.0     0.0   0.00   0.00
+
+Saved <PLEB_HOME>/results/paper_II/noninterference_audit.csv

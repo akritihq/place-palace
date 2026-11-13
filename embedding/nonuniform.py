@@ -5,6 +5,13 @@ Non-uniform persistence landmark embedding (PALACE, Paper II).
 
 Implements:
   1. NonUniformEmbedding  — learnable positions, radii, weights
+
+  NORMALISATION (documented 2026-11-08): `NonUniformEmbedding.embed` returns
+  w_k * 2^{-n-1/2} * phi_{p_k,r_k}(A) and `rho_nu` returns 2^{-n-5/2} tau w_min, i.e. the
+  implementation carries a global factor 2^{-n-1/2} that Paper II's eq:sum_embed /
+  eq:nu_rho_formula do not.  The code is internally consistent (every ratio of an embedded
+  distance to rho_nu is scale-free); the factor must be included whenever a code-scale
+  quantity is compared with a paper-scale constant (Lipschitz constant N_max, floor w tau/4).
   2. Soft coordinate function  — sigmoid-smoothed phi for gradient optimization
   3. Weighted landmark kernel  — k_omega and RKHS distance D_omega^2
   4. ThreeBlockOptimizer  — alternating optimization of (omega, radii, positions)
@@ -127,7 +134,7 @@ def soft_grad_positions(positions: np.ndarray, radii: np.ndarray,
 
     pers_lm = (positions[:, 1] - positions[:, 0]) / 2.0                  # (K,)
     pers_pts = (pts[:, 1] - pts[:, 0]) / 2.0                            # (m,)
-    d_via = pers_lm[:, np.newaxis] + pers_pts[np.newaxis, :]             # (K, m)
+    d_via = np.maximum(pers_lm[:, np.newaxis], pers_pts[np.newaxis, :])  # (K, m)  eq:db_single (max, not sum; fixed 2026-11-08)
 
     d_B = np.minimum(d_inf, d_via)                                       # (K, m)
     use_inf = (d_inf <= d_via)                                           # (K, m)
@@ -140,8 +147,9 @@ def soft_grad_positions(positions: np.ndarray, radii: np.ndarray,
         grad_d_inf[:, :, ax] = np.where(mask, np.sign(raw_diff[:, :, ax]), 0.0)
 
     grad_d_via = np.zeros((K, m, 2))
-    grad_d_via[:, :, 0] = -0.5
-    grad_d_via[:, :, 1] = 0.5
+    lm_is_max = pers_lm[:, np.newaxis] >= pers_pts[np.newaxis, :]        # d_via depends on p_k only then
+    grad_d_via[:, :, 0] = np.where(lm_is_max, -0.5, 0.0)
+    grad_d_via[:, :, 1] = np.where(lm_is_max, 0.5, 0.0)
 
     grad_dB = np.where(use_inf[:, :, np.newaxis], grad_d_inf, grad_d_via)
 
@@ -254,15 +262,25 @@ class NonUniformEmbedding:
                 lambda_0 = min(lambda_0, np.min(max_depth_per_pt))
         return lambda_0 if np.isfinite(lambda_0) else 0.0
 
-    def is_admissible(self, tau: float, gamma: float = 0.0) -> bool:
-        """Check (gamma, tau)-admissibility (Definition 3, Paper II)."""
-        if np.min(self.radii) < gamma:
-            return False
-        if np.max(self.radii) > 4 * tau:
-            return False
-        if self.rho_nu(tau) <= gamma:
-            return False
-        return True
+    def admissibility(self, tau: float, pts_list: Optional[List[np.ndarray]] = None) -> dict:
+        """tau-admissibility of Paper II Definition sep_radius, on the training support:
+             (i)  lambda_0(L) >= tau/4,
+             (ii) r_k <= (tau + lambda_0)/2 for every landmark.
+        pts_list defaults to the support stored by init_nonuniform_from_data."""
+        if pts_list is None:
+            if getattr(self, "_support", None) is None:
+                raise ValueError("pass the training diagrams (pts_list) or build via init_nonuniform_from_data")
+            pts_list = [self._support]
+        lam = self.lebesgue_number(pts_list)
+        ii = self.radii <= (tau + lam) / 2.0
+        return {"lambda_0": lam, "i": bool(lam >= tau / 4.0), "ii_frac": float(ii.mean()),
+                "admissible": bool(lam >= tau / 4.0 and ii.all())}
+
+    def is_admissible(self, tau: float, pts_list: Optional[List[np.ndarray]] = None) -> bool:
+        """Definition sep_radius exactly (before 2026-11-08 this checked a different predicate:
+        min r >= gamma, max r <= 4 tau, rho_nu > gamma, which disagreed with the definition on
+        4 of 9 run configurations)."""
+        return self.admissibility(tau, pts_list)["admissible"]
 
     def _clip(self, pts: np.ndarray) -> np.ndarray:
         if len(pts) == 0:
@@ -732,11 +750,15 @@ class ThreeBlockOptimizer:
 
 class CertifiedClassifier:
     """
-    Certified nearest-centroid classifier (Section 5.5, Paper II).
-
-    Each prediction is accompanied by a certificate: if
-        r_m < kappa * rho_nu / 2,
-    the prediction is correct with probability >= 1 - alpha.
+    DEPRECATED (2026-11-13; code review 2026-11-08, finding 14).  Legacy nearest-centroid
+    classifier with a plug-in confidence radius.  Not Algorithm 2 of Paper II, and its former
+    docstring overstated the guarantee: Theorem `thm:certified` certifies *agreement* between
+    the empirical and the population nearest-centroid rule, never correctness, and only when
+    the configuration is fixed independently of the certified sample and the covariance
+    terms are bounded rather than plugged in.  The reference implementation of the
+    certificate is `experiments/cert_firing_valid_fps.py` (valid form) and
+    `experiments/grid_common.py` (plug-in radii as diagnostics).  Kept so that old scripts
+    import; emits a DeprecationWarning on construction.
 
     Parameters
     ----------
@@ -749,6 +771,10 @@ class CertifiedClassifier:
     def __init__(self, emb: NonUniformEmbedding,
                  kernel: WeightedLandmarkKernel,
                  tau: float, alpha: float = 0.05):
+        import warnings
+        warnings.warn("CertifiedClassifier is deprecated: its radius is a plug-in diagnostic, not a "
+                      "certificate; see experiments/cert_firing_valid_fps.py", DeprecationWarning,
+                      stacklevel=2)
         self.emb = emb
         self.kernel = kernel
         self.tau = tau
@@ -897,7 +923,10 @@ def farthest_point_sampling(pts: np.ndarray, K: int,
         d = np.max(np.abs(pts - last[np.newaxis, :]), axis=1)
         pers_last = (last[1] - last[0]) / 2.0
         pers_pts = (pts[:, 1] - pts[:, 0]) / 2.0
-        d_via = pers_last + pers_pts
+        # eq:db_single / utils.bottleneck.d_B1_batch: the via-diagonal cost is the MAX of the two
+        # diagonal distances (bottleneck), not their sum (fixed 2026-11-08; the sum changed
+        # 28-64% of the K=200 selections and gave a 2-8% worse d_B covering radius)
+        d_via = np.maximum(pers_last, pers_pts)
         d_B = np.minimum(d, d_via)
         min_dists = np.minimum(min_dists, d_B)
         selected.append(np.argmax(min_dists))
@@ -910,10 +939,17 @@ def init_nonuniform_from_data(diagrams_by_class: List[List[np.ndarray]],
                               tau: Optional[float] = None,
                               n_diagram: int = 1,
                               seed: int = 0,
-                              alpha: float = 0.75) -> NonUniformEmbedding:
+                              alpha: float = 0.75,
+                              enforce_cap: bool = True) -> NonUniformEmbedding:
     """
     Initialize a NonUniformEmbedding from training data using
     class-aware farthest-point sampling.
+
+    enforce_cap : apply the diagonal-clearance cap r_k <= d_B(p_k, Delta) of Paper II
+                  eq:config_def after the [tau/2, 4 tau] clip (default True since 2026-11-08;
+                  before, 20-54% of landmarks violated it at the lower clip and the upper
+                  distortion bound eq:upper_distortion failed).  False reproduces the legacy
+                  configurations.
 
     Parameters
     ----------
@@ -981,11 +1017,18 @@ def init_nonuniform_from_data(diagrams_by_class: List[List[np.ndarray]],
         radii = np.array([tau])
 
     radii = np.clip(radii, tau / 2.0, 4.0 * tau)
+    if enforce_cap:
+        radii = np.minimum(radii, np.maximum((positions[:, 1] - positions[:, 0]) / 2.0, 0.0))
 
     # Equal weights
     weights = np.full(len(positions), 1.0 / np.sqrt(len(positions)))
 
-    return NonUniformEmbedding(positions, radii, weights, L, n_diagram)
+    emb = NonUniformEmbedding(positions, radii, weights, L, n_diagram)
+    emb.tau = tau                      # the ONE separation scale (median half-persistence of
+    emb.alpha = alpha                  # the training points); downstream code must reuse it
+    emb.cap_enforced = enforce_cap
+    emb._support = pts_all             # training support R for lebesgue_number / is_admissible
+    return emb
 
 
 def init_nonuniform_class_weighted(diagrams_by_class: List[List[np.ndarray]],
@@ -995,7 +1038,8 @@ def init_nonuniform_class_weighted(diagrams_by_class: List[List[np.ndarray]],
                                    seed: int = 0,
                                    alpha: float = 0.75,
                                    beta: float = 1.0,
-                                   kde_k: int = 15) -> NonUniformEmbedding:
+                                   kde_k: int = 15,
+                                   enforce_cap: bool = True) -> NonUniformEmbedding:
     """
     Class-weighted variant of `init_nonuniform_from_data`.
 
@@ -1126,6 +1170,8 @@ def init_nonuniform_class_weighted(diagrams_by_class: List[List[np.ndarray]],
     factor = np.exp(beta * s)
     radii = base_radii * factor
     radii = np.clip(radii, tau / 2.0, 4.0 * tau)
+    if enforce_cap:                    # eq:config_def, as in init_nonuniform_from_data
+        radii = np.minimum(radii, np.maximum((positions[:, 1] - positions[:, 0]) / 2.0, 0.0))
 
     weights = np.full(len(positions), 1.0 / np.sqrt(len(positions)))
 

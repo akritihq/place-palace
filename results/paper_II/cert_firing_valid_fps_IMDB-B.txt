@@ -1,0 +1,18 @@
+IMDB-B: 1000 diagrams, filt jaccard+hks10, K=200 alpha=0.75 fit_frac=0.5 (1s)
+  seed 0 fold 0: m_min=225 Delta^=0.0005 r_valid=0.0136 r_vP(op,plugin)=0.0004 box/norm viol 0.13/0.04 NC 71.0 (1s)
+  seed 1 fold 0: m_min=225 Delta^=0.0005 r_valid=0.0143 r_vP(op,plugin)=0.0004 box/norm viol 0.09/0.03 NC 59.0 (2s)
+  seed 2 fold 0: m_min=225 Delta^=0.0004 r_valid=0.0145 r_vP(op,plugin)=0.0004 box/norm viol 0.11/0.04 NC 71.0 (3s)
+  seed 3 fold 0: m_min=225 Delta^=0.0005 r_valid=0.0139 r_vP(op,plugin)=0.0004 box/norm viol 0.11/0.04 NC 69.0 (4s)
+  seed 4 fold 0: m_min=225 Delta^=0.0005 r_valid=0.0139 r_vP(op,plugin)=0.0004 box/norm viol 0.09/0.04 NC 71.0 (6s)
+
+IMDB-B: 50 seed-folds; firing = r < Delta^/4 on the held-out-half centroids
+  valid          fires   0.0% of folds   median r/(Delta^/4) = 110.23
+  pin_plugin     fires   0.0% of folds   median r/(Delta^/4) = 20.54
+  pin_asR        fires   0.0% of folds   median r/(Delta^/4) = 576.41
+  vP_op_plugin   fires   0.0% of folds   median r/(Delta^/4) = 2.85
+  vP_tr_plugin   fires   0.0% of folds   median r/(Delta^/4) = 4.66
+  vP_tr_asR      fires   0.0% of folds   median r/(Delta^/4) = 41.17
+  gauss_plugin   fires   0.0% of folds   median r/(Delta^/4) = 7.79
+  per-point VALID certificate: 0.0% of test points, NC acc on them nan; NC acc 66.2
+wrote <PLEB_HOME>/results/paper_II/cert_firing_valid_fps_IMDB-B.csv
+CERT-FIRING-VALID DONE

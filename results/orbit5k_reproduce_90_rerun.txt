@@ -1,0 +1,31 @@
+Loading Orbit5k point clouds …
+  5000 point clouds, 5 classes
+
+Building diagram caches …
+  cached: alpha H0+H1 top-50 (5000 diagrams)
+  cached: density k=10 H0+H1 top-50 (5000 diagrams)
+  L_alpha=0.3087  L_dens=0.1910
+
+Running 10-fold CV at K=200, α=1.75, σ=0.001 (parallel) …
+
+── Per-fold results ──
+  fold 0  test=90.00%  train=93.87%  C=10     γ̂=0.3930  (K=400)
+  fold 1  test=89.80%  train=94.24%  C=10     γ̂=0.3694  (K=400)
+  fold 2  test=90.20%  train=93.49%  C=10     γ̂=0.3629  (K=400)
+  fold 3  test=91.00%  train=94.18%  C=10     γ̂=0.3574  (K=400)
+  fold 4  test=92.60%  train=94.33%  C=10     γ̂=0.3808  (K=400)
+  fold 5  test=90.00%  train=94.24%  C=10     γ̂=0.3745  (K=400)
+  fold 6  test=90.80%  train=94.38%  C=10     γ̂=0.3770  (K=400)
+  fold 7  test=90.40%  train=93.78%  C=10     γ̂=0.3771  (K=400)
+  fold 8  test=90.00%  train=94.02%  C=10     γ̂=0.3644  (K=400)
+  fold 9  test=89.60%  train=94.09%  C=10     γ̂=0.3216  (K=400)
+
+── Summary ──
+  Test accuracy : 90.44 ± 0.83% (paper: 90.4 ± 1.1%)
+  Train accuracy: 94.06%
+  γ̂ (mean over folds)    : 0.3678
+  γ̂/√K (K=400)       : 0.01839
+
+Saved → results/orbit5k_reproduce_90.csv
+
+Total: 4.1 min

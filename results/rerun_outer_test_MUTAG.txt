@@ -1,0 +1,18 @@
+MUTAG: 5 seeds x 10 folds; 149 distinct (fold, filt) embeddings to fit
+  diagrams ready in 1.3s, L=6.600
+  14/149
+  28/149
+  42/149
+  56/149
+  70/149
+  84/149
+  98/149
+  112/149
+  126/149
+  140/149
+wrote <PLEB_HOME>/results/filtration_grid/analysis/outer_test_selected_mutag.csv
+
+=== MUTAG: outer-fold test accuracy (mean ± sd over seed x fold) ===
+  mah      n= 50  test  83.0 ±  6.9   (inner-CV at pick  85.9)   top filts: {'deg+eigen': 30, 'deg+betw': 18, 'betw+hks10': 2}
+  gamma    n= 50  test  77.5 ±  8.8   (inner-CV at pick  79.1)   top filts: {'degree': 50}
+  innercv  n= 50  test  86.4 ±  7.8   (inner-CV at pick  89.3)   top filts: {'hks_t10': 12, 'deg+hks10': 9, 'hks_t5': 6}

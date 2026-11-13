@@ -1,0 +1,42 @@
+PTC: 5 seeds x 10 folds; 131 distinct (fold, filt) embeddings to fit
+Computing persistence for PTC (hks_t0.1, H0H1, extended) ...
+  100/344
+  200/344
+  300/344
+Computing persistence for PTC (hks_t0.25, H0H1, extended) ...
+  100/344
+  200/344
+  300/344
+Computing persistence for PTC (hks_t0.5, H0H1, extended) ...
+  100/344
+  200/344
+  300/344
+Computing persistence for PTC (hks_t100, H0H1, extended) ...
+  100/344
+  200/344
+  300/344
+Computing persistence for PTC (hks_t2, H0H1, extended) ...
+  100/344
+  200/344
+  300/344
+Computing persistence for PTC (hks_t50, H0H1, extended) ...
+  100/344
+  200/344
+  300/344
+  diagrams ready in 3.2s, L=17.600
+  13/131
+  26/131
+  39/131
+  52/131
+  65/131
+  78/131
+  91/131
+  104/131
+  117/131
+  130/131
+wrote <PLEB_HOME>/results/filtration_grid/analysis/outer_test_selected_ptc.csv
+
+=== PTC: outer-fold test accuracy (mean ± sd over seed x fold) ===
+  mah      n= 50  test  60.2 ±  8.2   (inner-CV at pick  61.1)   top filts: {'deg+betw': 30, 'nodelabel+betw': 10, 'deg+eigen': 10}
+  gamma    n= 50  test  57.8 ±  9.3   (inner-CV at pick  59.3)   top filts: {'deg+betw': 27, 'deg+forman': 5, 'deg+eigen': 4}
+  innercv  n= 50  test  57.0 ±  8.5   (inner-CV at pick  62.9)   top filts: {'edge_betweenness': 12, 'hks_t5': 8, 'nodelabel+betw': 5}

@@ -1,0 +1,23 @@
+Computing persistence for COX2 (hks_t1, H0H1, extended) ...
+  100/467
+  200/467
+  300/467
+  400/467
+COX2: 467 diagrams, filt betw+hks1, K=200 alpha=0.75 fit_frac=0.5 (14s)
+  seed 0 fold 0: m_min=46 Delta^=0.0015 r_valid=0.0852 r_vP(op,plugin)=0.0048 box/norm viol 0.29/0.10 NC 34.0 (14s)
+  seed 1 fold 0: m_min=46 Delta^=0.0010 r_valid=0.0880 r_vP(op,plugin)=0.0047 box/norm viol 0.26/0.10 NC 59.6 (17s)
+  seed 2 fold 0: m_min=46 Delta^=0.0011 r_valid=0.0902 r_vP(op,plugin)=0.0043 box/norm viol 0.28/0.09 NC 66.0 (20s)
+  seed 3 fold 0: m_min=46 Delta^=0.0013 r_valid=0.0874 r_vP(op,plugin)=0.0047 box/norm viol 0.34/0.10 NC 53.2 (23s)
+  seed 4 fold 0: m_min=46 Delta^=0.0019 r_valid=0.0875 r_vP(op,plugin)=0.0050 box/norm viol 0.29/0.10 NC 57.4 (26s)
+
+COX2: 50 seed-folds; firing = r < Delta^/4 on the held-out-half centroids
+  valid          fires   0.0% of folds   median r/(Delta^/4) = 269.65
+  pin_plugin     fires   0.0% of folds   median r/(Delta^/4) = 56.56
+  pin_asR        fires   0.0% of folds   median r/(Delta^/4) = 607.33
+  vP_op_plugin   fires   0.0% of folds   median r/(Delta^/4) = 14.16
+  vP_tr_plugin   fires   0.0% of folds   median r/(Delta^/4) = 18.03
+  vP_tr_asR      fires   0.0% of folds   median r/(Delta^/4) = 98.06
+  gauss_plugin   fires   0.0% of folds   median r/(Delta^/4) = 31.71
+  per-point VALID certificate: 0.0% of test points, NC acc on them nan; NC acc 54.8
+wrote <PLEB_HOME>/results/paper_II/cert_firing_valid_fps_COX2.csv
+CERT-FIRING-VALID DONE

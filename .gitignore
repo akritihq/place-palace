@@ -16,7 +16,8 @@ dist/
 
 # Cached datasets and intermediate results
 data/
-results/
+# results/ is tracked: it holds the per-fold and summary files behind the paper's tables
+# (see README). Scratch outputs of re-runs go there too; add them deliberately.
 *.pkl
 *.npy
 

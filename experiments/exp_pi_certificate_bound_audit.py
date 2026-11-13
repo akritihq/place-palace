@@ -54,6 +54,22 @@ def lambda_nu(scales: np.ndarray, masses: np.ndarray, L: float,
     return float(val) / (t - R1)
 
 
+def step_lower(delta: np.ndarray, scales: np.ndarray, masses: np.ndarray) -> np.ndarray:
+    """Sharp step-form lower bound from PI Prop 2.1(b):
+    σ(δ) = (1/16) · √( Σ_{k: 3R_k ≤ δ} w_k² R_k² )
+         = (1/16) · √( Σ_{k: 3R_k ≤ δ} masses[k] )
+    since masses[k] = w_k² R_k².
+    Returns 0 when no scale is active (δ < 3 R_1).
+    """
+    delta = np.asarray(delta, dtype=float).reshape(-1)
+    out = np.zeros_like(delta)
+    for i, d in enumerate(delta):
+        active = scales * 3.0 <= d
+        if active.any():
+            out[i] = np.sqrt(masses[active].sum()) / 16.0
+    return out
+
+
 def audit_dataset(name: str, filtrations: list[str], n_pairs: int,
                   rng: np.random.Generator) -> dict | None:
     print(f"\n=== {name} ({'+'.join(filtrations)}) ===")
@@ -133,6 +149,11 @@ def audit_dataset(name: str, filtrations: list[str], n_pairs: int,
     qual_phi = phi_norms[qualifying]
     ratios = qual_phi / (lam * qual_deltas)
 
+    # Sharp step-form ratio per PI Prop 2.1(b): ‖Φ(A) − Φ(B)‖ / σ(δ).
+    sigma_step = step_lower(qual_deltas, emb.scales, emb.masses)
+    safe = sigma_step > 0
+    step_ratios = qual_phi[safe] / sigma_step[safe]
+
     summary = {
         "dataset":      name,
         "filtration":   "+".join(filtrations),
@@ -147,15 +168,26 @@ def audit_dataset(name: str, filtrations: list[str], n_pairs: int,
         "ratio_p75":    float(np.percentile(ratios, 75)),
         "ratio_min":    float(ratios.min()),
         "ratio_mean":   float(ratios.mean()),
+        "step_bound_holds_pct": 100.0 * float(np.mean(step_ratios >= 1.0)),
+        "step_ratio_p25":  float(np.percentile(step_ratios, 25)),
+        "step_ratio_p50":  float(np.percentile(step_ratios, 50)),
+        "step_ratio_p75":  float(np.percentile(step_ratios, 75)),
+        "step_ratio_min":  float(step_ratios.min()),
+        "step_ratio_mean": float(step_ratios.mean()),
     }
     print(f"  R_1={R1:.4f}, 3R_1={3*R1:.4f}")
     print(f"  qualifying:    {n_qual}/{len(deltas)}  "
           f"(d_b ≥ 3R_1 = {3*R1:.4f})")
-    print(f"  bound holds:   {summary['bound_holds_pct']:.1f}%")
-    print(f"  ratio p25/p50/p75: "
+    print(f"  Lipschitz bound holds:   {summary['bound_holds_pct']:.1f}%")
+    print(f"  Lipschitz ratio p25/p50/p75: "
           f"{summary['ratio_p25']:.2f} / {summary['ratio_p50']:.2f} / "
           f"{summary['ratio_p75']:.2f}   (min {summary['ratio_min']:.2f}, "
           f"mean {summary['ratio_mean']:.2f})")
+    print(f"  Step-form bound holds:   {summary['step_bound_holds_pct']:.1f}%")
+    print(f"  Step-form ratio p25/p50/p75: "
+          f"{summary['step_ratio_p25']:.2f} / {summary['step_ratio_p50']:.2f} / "
+          f"{summary['step_ratio_p75']:.2f}   (min {summary['step_ratio_min']:.2f}, "
+          f"mean {summary['step_ratio_mean']:.2f})")
     return summary
 
 

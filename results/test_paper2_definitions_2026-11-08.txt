@@ -1,0 +1,29 @@
+landmarks built: [200, 200, 200]  (K=200 requested; code builds (K//n_classes)*n_classes)
+[PASS] T1 embed == 2^{-3/2} w phi ; rho_nu == 2^{-3/2} tau w_min/4 (code consistent; paper has no 2^{-3/2})  max diff 0.0e+00; rho_nu 6.250e-04 vs 6.250e-04
+[PASS] T2 d_B1_batch == eq:db_single  max diff 0.0e+00
+[PASS] T3 Lemma lip_coord |phi(x)-phi(y)| <= d_B(x,y)  max excess 0.0e+00
+[PASS] T4 eq:config_def cap r_k <= d_B(p_k,Delta) [MUTAG deg+hks10 K=200 a=1.75 (audit cfg)]  0.0% of 200 landmarks violate; max r/pers 1.0x  (legacy enforce_cap=False: 51.0% violate)
+[PASS] T4 eq:config_def cap r_k <= d_B(p_k,Delta) [MUTAG deg+hks10 K=200 a=0.75 (Mah table cfg)]  0.0% of 200 landmarks violate; max r/pers 1.0x  (legacy enforce_cap=False: 51.0% violate)
+[PASS] T4 eq:config_def cap r_k <= d_B(p_k,Delta) [Orbit5k alpha_H1 K=200 a=4.0 (headline cfg)]  0.0% of 200 landmarks violate; max r/pers 1.0x  (legacy enforce_cap=False: 31.0% violate)
+[PASS] T5a eq:upper_distortion under the cap [MUTAG deg+hks10 K=200 a=1.75 (audit cfg)]  max ||dPhi||/(N_max d_B) = 0.033
+[PASS] T5b(info) eq:upper_distortion FAILS without the cap, as expected [MUTAG deg+hks10 K=200 a=1.75 (audit cfg)]  adding one point 0.0001 from the diagonal: ||dPhi|| / (N_max d_B) = 3.6x  (landmark r=0.034, pers=0.003)
+[PASS] T5b(info) eq:upper_distortion FAILS without the cap, as expected [MUTAG deg+hks10 K=200 a=0.75 (Mah table cfg)]  adding one point 0.0001 from the diagonal: ||dPhi|| / (N_max d_B) = 3.6x  (landmark r=0.034, pers=0.003)
+[PASS] T5b(info) eq:upper_distortion FAILS without the cap, as expected [Orbit5k alpha_H1 K=200 a=4.0 (headline cfg)]  adding one point 0.0001 from the diagonal: ||dPhi|| / (N_max d_B) = 1.4x  (landmark r=0.028, pers=0.007)
+[PASS] T6 farthest_point_sampling uses the metric of eq:db_single (eq:fps_rule)  0/100 selections differ from d_B-FPS; d_B covering radius code 0.0051 vs d_B-FPS 0.0051
+[PASS] T7a lebesgue_number == eq:lebesgue (brute force)  0.00000 vs 0.00000
+       MUTAG deg+hks10 K=200 a=1.75 (audit cfg) | tau=median half-persistence (code clip, protocol table): tau=0.0686 lambda_0=0.0000  (i) lambda_0>=tau/4: False  (ii) r_k<=(tau+lambda_0)/2 holds for 98% of landmarks  | code is_admissible=False
+       MUTAG deg+hks10 K=200 a=1.75 (audit cfg) | tau=median radius (Algorithm box, audit): tau=0.0328 lambda_0=0.0000  (i) lambda_0>=tau/4: False  (ii) r_k<=(tau+lambda_0)/2 holds for 26% of landmarks  | code is_admissible=False
+       MUTAG deg+hks10 K=200 a=0.75 (Mah table cfg) | tau=median half-persistence (code clip, protocol table): tau=0.0686 lambda_0=0.0000  (i) lambda_0>=tau/4: False  (ii) r_k<=(tau+lambda_0)/2 holds for 100% of landmarks  | code is_admissible=False
+       MUTAG deg+hks10 K=200 a=0.75 (Mah table cfg) | tau=median radius (Algorithm box, audit): tau=0.0328 lambda_0=0.0000  (i) lambda_0>=tau/4: False  (ii) r_k<=(tau+lambda_0)/2 holds for 26% of landmarks  | code is_admissible=False
+       Orbit5k alpha_H1 K=200 a=4.0 (headline cfg) | tau=median half-persistence (code clip, protocol table): tau=0.0071 lambda_0=0.0000  (i) lambda_0>=tau/4: False  (ii) r_k<=(tau+lambda_0)/2 holds for 9% of landmarks  | code is_admissible=False
+       Orbit5k alpha_H1 K=200 a=4.0 (headline cfg) | tau=median radius (Algorithm box, audit): tau=0.0082 lambda_0=0.0000  (i) lambda_0>=tau/4: False  (ii) r_k<=(tau+lambda_0)/2 holds for 12% of landmarks  | code is_admissible=False
+[PASS] T7b is_admissible implements def:sep_radius  disagrees with (i)+(ii) in 0/6 (config, tau) cases: it checks min r>=gamma, max r<=4tau, rho_nu>gamma instead
+[PASS] T8a Thm nu_rho: ||dPhi|| >= rho_nu on every exactly-coherent pair  600/600 coherent (exact Def 2.4, gudhi d_B); violations 0; min ratio 9.01
+[PASS] T8b audit script's db_pair qualifies only pairs with true d_B >= tau  0/600 audit-qualified pairs have gudhi d_B < tau
+       coherence rate: exact 100.0%  vs audit-script method (approx d_B, paper-scale floor vs code-scale embed) 100.0%
+[PASS] T9a compute_r_m == 2 R sqrt(2 log(2k/delta)/m_min)   (paper radius (i), L3217; R_max in place of R-bar)  
+[PASS] T9a' quarter script r_pinelis == paper radius (i)  
+[PASS] T9b compute_r_m_gauss == sqrt(sigma_op chi2_{ell,1-delta/k}/m)   (radius (ii), plug-in sigma_op)  
+[PASS] T9c quarter script r_vP == sqrt(2 sigma L/m) + 4 R L/(3m)   (paper (iii) line 3236 with tr -> sigma_op proxy)  
+
+ALL PASS

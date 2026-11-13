@@ -1,0 +1,18 @@
+Orbit5k: 5000 diagrams, filt alpha H0+H1, K=200 alpha=4.0 fit_frac=0.5 (0s)
+  seed 0 fold 0: m_min=450 Delta^=0.0007 r_valid=0.0081 r_vP(op,plugin)=0.0006 box/norm viol 0.90/0.07 NC 55.8 (4s)
+  seed 1 fold 0: m_min=450 Delta^=0.0007 r_valid=0.0076 r_vP(op,plugin)=0.0006 box/norm viol 0.77/0.09 NC 60.6 (36s)
+  seed 2 fold 0: m_min=450 Delta^=0.0007 r_valid=0.0077 r_vP(op,plugin)=0.0006 box/norm viol 0.89/0.09 NC 53.0 (68s)
+  seed 3 fold 0: m_min=450 Delta^=0.0008 r_valid=0.0083 r_vP(op,plugin)=0.0006 box/norm viol 0.89/0.07 NC 60.2 (100s)
+  seed 4 fold 0: m_min=450 Delta^=0.0006 r_valid=0.0080 r_vP(op,plugin)=0.0007 box/norm viol 0.87/0.10 NC 55.2 (132s)
+
+Orbit5k: 50 seed-folds; firing = r < Delta^/4 on the held-out-half centroids
+  valid          fires   0.0% of folds   median r/(Delta^/4) = 48.27
+  pin_plugin     fires   0.0% of folds   median r/(Delta^/4) = 29.17
+  pin_asR        fires   0.0% of folds   median r/(Delta^/4) = 370.52
+  vP_op_plugin   fires   0.0% of folds   median r/(Delta^/4) = 3.78
+  vP_tr_plugin   fires   0.0% of folds   median r/(Delta^/4) = 4.57
+  vP_tr_asR      fires   0.0% of folds   median r/(Delta^/4) = 22.00
+  gauss_plugin   fires   0.0% of folds   median r/(Delta^/4) = 10.73
+  per-point VALID certificate: 0.0% of test points, NC acc on them nan; NC acc 55.8
+wrote <PLEB_HOME>/results/paper_II/cert_firing_valid_fps_Orbit5k.csv
+CERT-FIRING-VALID DONE

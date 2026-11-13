@@ -1,0 +1,18 @@
+IMDB-M: 5 seeds x 10 folds; 125 distinct (fold, filt) embeddings to fit
+  diagrams ready in 0.8s, L=73.700
+  12/125
+  24/125
+  36/125
+  48/125
+  60/125
+  72/125
+  84/125
+  96/125
+  108/125
+  120/125
+wrote <PLEB_HOME>/results/filtration_grid/analysis/outer_test_selected_imdb-m.csv
+
+=== IMDB-M: outer-fold test accuracy (mean ± sd over seed x fold) ===
+  mah      n= 50  test  43.2 ±  3.5   (inner-CV at pick  43.6)   top filts: {'betw+jaccard': 25, 'jaccard': 8, 'ricci+hks10': 7}
+  gamma    n= 50  test  42.0 ±  4.1   (inner-CV at pick  43.0)   top filts: {'betw+ricci': 24, 'betweenness': 15, 'betw+jaccard': 6}
+  innercv  n= 50  test  43.5 ±  3.4   (inner-CV at pick  44.1)   top filts: {'betw+jaccard': 23, 'jaccard': 8, 'betw+ricci': 6}

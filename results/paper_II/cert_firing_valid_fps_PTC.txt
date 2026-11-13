@@ -1,0 +1,22 @@
+Computing persistence for PTC (hks_t1, H0H1, extended) ...
+  100/344
+  200/344
+  300/344
+PTC: 344 diagrams, filt betw+hks1, K=200 alpha=0.75 fit_frac=0.5 (1s)
+  seed 0 fold 0: m_min=68 Delta^=0.0003 r_valid=0.0289 r_vP(op,plugin)=0.0013 box/norm viol 0.17/0.08 NC 65.7 (1s)
+  seed 1 fold 0: m_min=68 Delta^=0.0004 r_valid=0.0323 r_vP(op,plugin)=0.0011 box/norm viol 0.21/0.06 NC 51.4 (2s)
+  seed 2 fold 0: m_min=68 Delta^=0.0003 r_valid=0.0264 r_vP(op,plugin)=0.0013 box/norm viol 0.16/0.08 NC 51.4 (3s)
+  seed 3 fold 0: m_min=68 Delta^=0.0004 r_valid=0.0435 r_vP(op,plugin)=0.0010 box/norm viol 0.16/0.05 NC 54.3 (4s)
+  seed 4 fold 0: m_min=68 Delta^=0.0005 r_valid=0.0319 r_vP(op,plugin)=0.0012 box/norm viol 0.15/0.07 NC 54.3 (5s)
+
+PTC: 50 seed-folds; firing = r < Delta^/4 on the held-out-half centroids
+  valid          fires   0.0% of folds   median r/(Delta^/4) = 317.28
+  pin_plugin     fires   0.0% of folds   median r/(Delta^/4) = 62.02
+  pin_asR        fires   0.0% of folds   median r/(Delta^/4) = 904.94
+  vP_op_plugin   fires   0.0% of folds   median r/(Delta^/4) = 12.49
+  vP_tr_plugin   fires   0.0% of folds   median r/(Delta^/4) = 16.08
+  vP_tr_asR      fires   0.0% of folds   median r/(Delta^/4) = 118.77
+  gauss_plugin   fires   0.0% of folds   median r/(Delta^/4) = 27.21
+  per-point VALID certificate: 0.0% of test points, NC acc on them nan; NC acc 54.8
+wrote <PLEB_HOME>/results/paper_II/cert_firing_valid_fps_PTC.csv
+CERT-FIRING-VALID DONE
